@@ -177,6 +177,7 @@ void PlayMode::update(float elapsed) {
 				remain = rotation * remain;
 			} else {
 				//ran into a wall, bounce / slide along it:
+				lives--;
 				glm::vec3 const &a = walkmesh->vertices[player.at.indices.x];
 				glm::vec3 const &b = walkmesh->vertices[player.at.indices.y];
 				glm::vec3 const &c = walkmesh->vertices[player.at.indices.z];
@@ -212,14 +213,6 @@ void PlayMode::update(float elapsed) {
 			player.transform->rotation = glm::normalize(adjust * player.transform->rotation);
 		}
 
-		/*
-		glm::mat4x3 frame = camera->transform->make_local_to_parent();
-		glm::vec3 right = frame[0];
-		//glm::vec3 up = frame[1];
-		glm::vec3 forward = -frame[2];
-
-		camera->transform->position += move.x * right + move.y * forward;
-		*/
 	}
 
 	//reset button press counters:
@@ -282,6 +275,29 @@ void PlayMode::draw(glm::uvec2 const &drawable_size) {
 			glm::vec3(-aspect + 0.1f * H + ofs, -1.0 + + 0.1f * H + ofs, 0.0),
 			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
 			glm::u8vec4(0xff, 0xff, 0xff, 0x00));
+
+		
+		lines.draw_text("LIVES: " + std::to_string(lives/4),
+			glm::vec3(-aspect + 35.4f * H, -1.0 + 0.1f * H, 0.0),
+			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
+			glm::u8vec4(0x00, 0x00, 0x00, 0x00));
+		lines.draw_text("LIVES: " + std::to_string(lives/4),
+			glm::vec3(-aspect + 35.4f * H + ofs, -1.0 + + 0.1f * H + ofs, 0.0),
+			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
+			glm::u8vec4(0xff, 0xff, 0xff, 0x00));
+		
+		
+		if (lives <= 0) {	
+			constexpr float Ht = .5f;
+			lines.draw_text("YOU LOSE :(",
+				glm::vec3(-aspect + 1.65f * Ht, -1.0 + 1.6f * Ht, 0.0),
+				glm::vec3(Ht, 0.0f, 0.0f), glm::vec3(0.0f, Ht, 0.0f),
+				glm::u8vec4(0x00, 0x00, 0x00, 0x00));
+			lines.draw_text("YOU LOSE :(",
+				glm::vec3(-aspect + 1.65f * Ht + ofs, -1.0 + + 1.6f * Ht + ofs, 0.0),
+				glm::vec3(Ht, 0.0f, 0.0f), glm::vec3(0.0f, Ht, 0.0f),
+				glm::u8vec4(0xff, 0x00, 0x00, 0x00));
+		}
 	}
 	GL_ERRORS();
 }

@@ -1,8 +1,8 @@
-# (TODO: your game's title)
+# Driver's Test
 
-Author: (TODO: your name)
+Author: Kavya Tummalapalli
 
-Design: (TODO: In two sentences or fewer, describe what is new and interesting about your game.)
+Design: My game is new and interesting because rather than using the crash detection system to help move seamlessly in a game, in this case the purpose of my game is to avoid those crashes.
 
 Screen Shot:
 
@@ -10,9 +10,7 @@ Screen Shot:
 
 How To Play:
 
-(TODO: describe the controls and (if needed) goals/strategy.)
-
-Sources: (TODO: list a source URL for any assets you did not create yourself. Make sure you have a license for the asset.)
+Drive around using the wasd keys and try not to crash. You have 10 lives, try to stay alive as long as possible!
 
 This game was built with [NEST](NEST.md).
 

@@ -18,6 +18,7 @@ struct PlayMode : Mode {
 	virtual void draw(glm::uvec2 const &drawable_size) override;
 
 	//----- game state -----
+	int lives = 40;
 
 	//input tracking:
 	struct Button {
